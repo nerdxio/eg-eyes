@@ -28,7 +28,7 @@
         <item name="colorError">@color/mp_color_error</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
-        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
     <style name="BottomSheetSpinnerItemStyle" parent="Widget.AppCompat.Light.DropDownItem.Spinner">

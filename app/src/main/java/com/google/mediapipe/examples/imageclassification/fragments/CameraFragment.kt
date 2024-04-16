@@ -19,6 +19,7 @@ package com.google.mediapipe.examples.imageclassification.fragments
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +42,7 @@ import com.google.mediapipe.examples.imageclassification.MainViewModel
 import com.google.mediapipe.examples.imageclassification.R
 import com.google.mediapipe.examples.imageclassification.databinding.FragmentCameraBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -50,6 +52,8 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
     companion object {
         private const val TAG = "Image Classifier"
     }
+
+    private var textToSpeech: TextToSpeech? = null
 
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
     private val fragmentCameraBinding
@@ -101,6 +105,7 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
 
     override fun onDestroyView() {
         _fragmentCameraBinding = null
+        textToSpeech?.shutdown()
         super.onDestroyView()
 
         // Shut down our background executor
@@ -147,6 +152,14 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
                 setUpCamera()
             }
         }
+
+        // Initialize TextToSpeech
+        textToSpeech = TextToSpeech(requireContext()) { status ->
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech?.language = Locale.US
+            }
+        }
+
         // Attach listeners to UI control widgets
         initBottomSheetControls()
     }
@@ -343,11 +356,18 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
             if (_fragmentCameraBinding != null) {
                 // Show result on bottom sheet
                 classificationResultsAdapter.updateResults(
-                    resultBundle.results.first()
+                    resultBundle.results.firstOrNull()
                 )
                 classificationResultsAdapter.notifyDataSetChanged()
                 fragmentCameraBinding.bottomSheetLayout.inferenceTimeVal.text =
                     String.format("%d ms", resultBundle.inferenceTime)
+
+                // Convert classification result to speech
+                val label = resultBundle.results.firstOrNull()?.classificationResult()
+                    ?.classifications()?.firstOrNull()?.categories()?.firstOrNull()?.categoryName()
+                if (label != null) {
+                    textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "")
+                }
             }
         }
     }

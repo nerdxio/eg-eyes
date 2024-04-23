@@ -366,7 +366,13 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
                 val label = resultBundle.results.firstOrNull()?.classificationResult()
                     ?.classifications()?.firstOrNull()?.categories()?.firstOrNull()?.categoryName()
                 if (label != null) {
-                    textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "")
+                    // textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "")
+                     new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "");
+                    }
+                }, 1000);
                 }
             }
         }

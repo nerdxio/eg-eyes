@@ -82,8 +82,8 @@ class ImageClassifierHelper(
 
         val modelName =
             when (currentModel) {
-                MODEL_EFFICIENTNETV0 -> "efficientnet-lite0.tflite"
-                MODEL_EFFICIENTNETV2 -> "efficientnet-lite2.tflite"
+                MODEL_EFFICIENTNETV0 -> "model.tflite"
+                MODEL_EFFICIENTNETV2 -> "model.tflite"
                 else -> "efficientnet-lite0.tflite"
             }
 

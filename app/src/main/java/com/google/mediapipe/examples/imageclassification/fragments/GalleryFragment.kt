@@ -23,6 +23,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.provider.MediaStore
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ import com.google.mediapipe.examples.imageclassification.ImageClassifierHelper
 import com.google.mediapipe.examples.imageclassification.MainViewModel
 import com.google.mediapipe.examples.imageclassification.databinding.FragmentGalleryBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import java.util.Locale
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
@@ -59,6 +61,7 @@ class GalleryFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
 
     /** Blocking ML operations are performed using this executor */
     private lateinit var backgroundExecutor: ScheduledExecutorService
+    private var textToSpeech: TextToSpeech? = null
 
     private val getContent =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
@@ -99,6 +102,13 @@ class GalleryFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         with(fragmentGalleryBinding.recyclerviewResults) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = classificationResultsAdapter
+        }
+
+        // Initialize TextToSpeech
+        textToSpeech = TextToSpeech(requireContext()) { status ->
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech?.language = Locale.US
+            }
         }
 
         initBottomSheetControls()
@@ -239,6 +249,11 @@ class GalleryFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
                                 String.format(
                                     "%d ms", resultBundle.inferenceTime
                                 )
+
+                            // Speak the text
+                            val textToSpeak = resultBundle.results.firstOrNull()?.classificationResult()
+                                ?.classifications()?.firstOrNull()?.categories()?.firstOrNull()?.categoryName()// replace this with the actual text you want to speak
+                            textToSpeech?.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
                         }
                     } ?: run {
                     Log.e(TAG, "Error running image classification.")

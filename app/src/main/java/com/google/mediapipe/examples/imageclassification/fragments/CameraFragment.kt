@@ -46,6 +46,7 @@ import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 
 class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
 
@@ -366,14 +367,8 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
                 val label = resultBundle.results.firstOrNull()?.classificationResult()
                     ?.classifications()?.firstOrNull()?.categories()?.firstOrNull()?.categoryName()
                 if (label != null) {
-                    // textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "")
-                     new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "");
-                    }
-                }, 1000);
-                }
+//                    Thread.sleep(2000)
+                    textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "")}
             }
         }
     }

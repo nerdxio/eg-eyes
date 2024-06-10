@@ -42,6 +42,7 @@ import com.google.mediapipe.examples.imageclassification.MainViewModel
 import com.google.mediapipe.examples.imageclassification.R
 import com.google.mediapipe.examples.imageclassification.databinding.FragmentCameraBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import kotlinx.coroutines.delay
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -367,7 +368,7 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
                 val label = resultBundle.results.firstOrNull()?.classificationResult()
                     ?.classifications()?.firstOrNull()?.categories()?.firstOrNull()?.categoryName()
                 if (label != null) {
-//                    Thread.sleep(2000)
+                    Thread.sleep(700)
                     textToSpeech?.speak(label, TextToSpeech.QUEUE_FLUSH, null, "")}
             }
         }

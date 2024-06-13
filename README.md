@@ -1,44 +1,30 @@
+# Image Classification with MediaPipe
 
+This project is a Kotlin-based application that uses the MediaPipe framework for image classification. It is designed to classify images from a video file and return the results along with the inference time.
 
-# MediaPipe Tasks Image Classification Android Demo
+## Features
 
-### Overview
+- Classify images from a video file.
+- Calculate the inference time for each frame.
+- Classify images from the gallery.
 
-This is a camera app that continuously classifies the objects (classes and confidence) in the frames seen by your device's back camera, in an image imported from the device gallery,  or in a video imported by the device gallery, with the option to use a quantized [EfficientDet Lite 0](https://storage.googleapis.com/mediapipe-tasks/object_detector/efficientdet_lite0_uint8.tflite), or [EfficientDet Lite2](https://storage.googleapis.com/mediapipe-tasks/object_detector/efficientdet_lite2_uint8.tflite) model.
+## Technologies Used
 
-The model files are downloaded by a Gradle script when you build and run the app. You don't need to do any steps to download TFLite models into the project explicitly unless you wish to use your own models. If you do use your own models, place them into the app's *assets* directory.
+- Kotlin
+- Java
+- Gradle
+- Python
 
-This application should be run on a physical Android device to take advantage of the physical camera, though the gallery tab will enable you to use an emulator for opening locally stored files.
+## How to Run
 
-![Image Classification Demo](imageclassifier.gif?raw=true "Image Classification Demo")
+1. Clone the repository.
+2. Open the project in Android Studio Iguana | 2023.2.1 Patch 1 or any other IDE that supports Kotlin.
+3. Build and run the project.
 
-## Build the demo using Android Studio
+## Code Structure
 
-### Prerequisites
+The main class `ImageClassifierHelper.kt` contains the logic for image classification. It uses the MediaPipe framework to classify images from a video file. The results of the classification and the inference time are wrapped in a `ResultBundle` object and returned to the caller.
 
-*   The **[Android Studio](https://developer.android.com/studio/index.html)**
-    IDE. This sample has been tested on Android Studio Dolphin.
+## Future Work
 
-*   A physical Android device with a minimum OS version of SDK 24 (Android 7.0 -
-    Nougat) with developer mode enabled. The process of enabling developer mode
-    may vary by device. You may also use an Android emulator with more limited
-    functionality.
-
-### Building
-
-*   Open Android Studio. From the Welcome screen, select Open an existing
-    Android Studio project.
-
-*   From the Open File or Project window that appears, navigate to and select
-    the mediapipe/examples/image_classification/android directory. Click OK. You may
-    be asked if you trust the project. Select Trust.
-
-*   If it asks you to do a Gradle Sync, click OK.
-
-*   With your Android device connected to your computer and developer mode
-    enabled, click on the green Run arrow in Android Studio.
-
-### Models used
-
-Downloading, extraction, and placing the models into the *assets* folder is
-managed automatically by the **download.gradle** file.
+This project is a starting point for more complex image classification tasks. Future work could include improving the classification accuracy, adding support for different video formats, and optimizing the inference time.

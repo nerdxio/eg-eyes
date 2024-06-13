@@ -1,4 +1,4 @@
-# Image Classification with MediaPipe
+# Egyptian Currency Image Classifier App
 
 This project is a Kotlin-based application that uses the MediaPipe framework for image classification. It is designed to classify images from a video file and return the results along with the inference time.
 
@@ -14,6 +14,7 @@ This project is a Kotlin-based application that uses the MediaPipe framework for
 - Java
 - Gradle
 - Python
+- MediaPipe
 
 ## How to Run
 

@@ -7,11 +7,11 @@ This project is a Kotlin-based application that uses the MediaPipe framework for
 - Classify images from a video file.
 - Calculate the inference time for each frame.
 - Classify images from the gallery.
+- Text-to-speech support for the classification results.
 
 ## Technologies Used
 
 - Kotlin
-- Java
 - Gradle
 - Python
 - MediaPipe
@@ -19,7 +19,7 @@ This project is a Kotlin-based application that uses the MediaPipe framework for
 ## How to Run
 
 1. Clone the repository.
-2. Open the project in Android Studio Iguana | 2023.2.1 Patch 1 or any other IDE that supports Kotlin.
+2. Open the project in Android Studio 
 3. Build and run the project.
 
 ## Code Structure

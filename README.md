@@ -22,9 +22,23 @@ This project is a Kotlin-based application that uses the MediaPipe framework for
 2. Open the project in Android Studio 
 3. Build and run the project.
 
-## Code Structure
+## Installation on Android
+Download the APK
+Download the APK file for the Egyptian Currency Image Classifier App from this Google Drive link: [Download APK](https://drive.google.com/drive/folders/1I6ZV_axkGoVWkaAdX2xrYtlteziPt271?usp=sharing).
 
-The main class `ImageClassifierHelper.kt` contains the logic for image classification. It uses the MediaPipe framework to classify images from a video file. The results of the classification and the inference time are wrapped in a `ResultBundle` object and returned to the caller.
+### Install the APK
+To install the APK on your Android phone, follow these steps:
+
+1. **Download the APK**:
+
+- Open the provided Google Drive link on your phone.
+- Navigate to the folder and download the APK file.
+
+2. **Enable Installation from Unknown Sources:**
+- Go to your phone's Settings.
+- Navigate to Security (or Biometrics and Security on some devices).
+- Enable Unknown Sources or Install unknown apps.
+- Choose the browser or file manager you used to download the APK and enable the permission to install unknown apps from that source.
 
 ## Future Work
 
